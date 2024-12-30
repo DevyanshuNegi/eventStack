@@ -1,0 +1,20 @@
+// "use client"
+import { redirect } from 'next/navigation'
+import EventForm from '@/components/event-form'
+// import { useUser } from '@clerk/clerk-react'
+import EventList from '@/components/event-list'
+
+export default function Admin() {
+
+    // const { isSignedIn, user, isLoaded } = useUser()
+
+    // console.log("user ", user);
+
+    return (
+        <div className="container mx-auto px-4 py-8">
+            {/* <h1>Hello, {user?.firstName}</h1> */}
+            <EventList type="upcoming" limit={3} isAdmin={true}/>
+        </div>
+    )
+}
+
