@@ -94,43 +94,6 @@ export default function EventForm({ event }: EventFormProps) {
       setIsSubmitting(false);
     }
   }
-  // async function onSubmit(data: z.infer<typeof eventSchema>) {
-  //   setIsSubmitting(true)
-  //   try {
-  //     let thumbnailUrl = event?.thumbnail
-
-  //     if (data.thumbnail) {
-  //       thumbnailUrl = await uploadImage(data.thumbnail)
-  //       console.log('thumbnailUrl', thumbnailUrl)
-
-  //     }
-
-  //     const eventData = {
-  //       ...data,
-  //       thumbnail: thumbnailUrl,
-  //       startDate: new Date(data.startDate),
-  //       endDate: new Date(data.endDate),
-  //     }
-
-  //     const response = await fetch(`/api/events${event ? `/${event._id}` : ''}`, {
-  //       method: event ? 'PUT' : 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(eventData),
-  //     })
-
-  //     if (response.ok) {
-  //       router.push('/admin/events')
-  //     } else {
-  //       console.error('Failed to submit event')
-  //     }
-  //   } catch (error) {
-  //     console.error('Error submitting event:', error)
-  //   } finally {
-  //     setIsSubmitting(false)
-  //   }
-  // }
   function convertToTimeDate(timeString:string) {
     // Get the current date
     const date = new Date();

@@ -2,7 +2,7 @@
 import { redirect } from 'next/navigation'
 import EventForm from '@/components/event-form'
 
-export default async function AddEventPage() {
+export default async function AddEventPage({ params }: { params: { id: string } }) {
   // const session = await getServerSession()
 
   // if (!session) {

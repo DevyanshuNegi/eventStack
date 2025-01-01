@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth/next'
 import { redirect } from 'next/navigation'
 import EventForm from '@/components/event-form'
 import { getEventById } from '@/models/Event'
+import { use, useEffect } from 'react'
 
 export default async function EditEventPage({ params }: { params: { id: string } }) {
   // const session = await getServerSession()
@@ -9,9 +10,9 @@ export default async function EditEventPage({ params }: { params: { id: string }
   // if (!session) {
   //   redirect('/admin/login')
   // }
-
+ 
   const event = await getEventById(params.id)
-
+    
   if (!event) {
     redirect('/admin/events')
   }

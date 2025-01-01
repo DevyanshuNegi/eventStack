@@ -29,11 +29,11 @@ export async function getEvents(type: 'upcoming' | 'past', limit?: number, user?
     const query = type === 'upcoming' ? { startDate: { $gte: now } } : { startDate: { $lt: now } };
     console.log("Constructed query:", query);
 
-    // Sort the events based on the startDate
-    const sort = type === 'upcoming' ? { startDate: 1 } : { startDate: -1 };
+    const sort: Record<string, 1 | -1> = {
+      startDate: type==='upcoming'?1:-1, // Ascending order
+    };
     console.log("Sort order:", sort);
 
-    // Fetch the events based on the query and sort order
     const events = await EventModel.find(query).sort(sort).limit(limit || 3).exec();
 
     console.log("Fetched events:", events);
@@ -45,53 +45,50 @@ export async function getEvents(type: 'upcoming' | 'past', limit?: number, user?
 }
 
 export async function getEventById(id: string): Promise<Event | null> {
-
-  await dbConnect();
-  const event = await EventModel.findById(id).exec();
-
-  return event;
+  try {
+    await dbConnect();
+    const event = await EventModel.findById(id).exec();
+    return event;
+  } catch (error) {
+    console.error("Error getting event by id:", error);
+    return null;
+    
+  }
 }
 
 export async function createEvent(event: Omit<Event, '_id' | 'createdAt' | 'updatedAt'>): Promise<Event> {
   await dbConnect();
 
-  // const now = new Date()
-  // const newEvent: Event = {
-  //   ...event,
-  //   createdAt: now,
-  //   updatedAt: now,
-  // }
-
   const createdEvent = await EventModel.create(event);
 
   return createdEvent;
 
-  // const result = await db.collection<Event>('events').insertOne(newEvent)
 }
 
-export async function updateEvent(id: string, event: Partial<Event>): Promise<Event | null> {
-  // const client = await clientPromise
-  // const db = client.db()
-  await dbConnect();
-  const updatedEvent = await EventModel.findByIdAndUpdate(
-    id,
-    event,
-    { new: true }
-  )
-  // const updatedEvent = await db.collection<Event>('events').findOneAndUpdate(
-  //   { _id: new ObjectId(id) },
-  //   { $set: { ...event, updatedAt: new Date() } },
-  //   { returnDocument: 'after' }
-  // )
-
-  return updatedEvent ?? null;
+export async function updateEvent(id:string,event: Partial<Event>): Promise<Event | null> {
+try {
+    await dbConnect();
+    console.log("id ", id);
+    console.log("event ", event);
+    const updatedEvent = await EventModel.findByIdAndUpdate(
+      id,
+      event,
+      { new: true }
+    )
+    console.log("updated event ", updatedEvent);
+  
+    return updatedEvent ?? null;
+} catch (error) {
+    console.error("Error updating event:", error);
+    return null;
+  }
+  
 }
+
 
 export async function deleteEvent(id: string): Promise<boolean> {
-  // const client = await clientPromise
-  // const db = client.db()
+
   await dbConnect();
-  // const result = await db.collection<Event>('events').deleteOne({ _id: new ObjectId(id) })
   const result = await EventModel.deleteOne({ _id: id }).exec();
   return result.deletedCount === 1
 }
@@ -105,8 +102,8 @@ const EventSchema: Schema<Event> = new mongoose.Schema({
   startTime: { type: Date, required: true },
   endTime: { type: Date, required: true },
   thumbnail: { type: String, required: false },
-  // createdAt: { type: Date, required: true },
-  // updatedAt: { type: Date, required: true },
+  // TODO: add created by field
+  // TODO: last edited by field
 }
 , {timestamps: true})
 

@@ -40,7 +40,7 @@ export default async function EventList({ type, limit, isAdmin }: EventListProps
             </Button>
             {isAdmin && (
               <Button asChild>
-                <Link href={`/edit-event/${event._id}`}>Edit Event</Link>
+                <Link href={`/admin/edit-event/${event._id}`}>Edit Event</Link>
               </Button>
             )
             }
@@ -72,7 +72,7 @@ export default async function EventList({ type, limit, isAdmin }: EventListProps
           </Button>
           {isAdmin && (
             <Button asChild>
-              <Link href={`/events/${234}`}>Edit Event</Link>
+              <Link href={`/admin/events/${234}`}>Edit Event</Link>
             </Button>
           )
           }

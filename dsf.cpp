@@ -5,7 +5,7 @@ using namespace std;
 struct Node{
     int value;
     Node* left;
-    Node* right;    
+    Node* right;
 };
 
 void dfs(Node* root) {
