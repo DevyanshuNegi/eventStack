@@ -49,7 +49,7 @@ export default async function EventList({ type, limit, isAdmin }: EventListProps
 
 
       ))}
-      <Card key={"234"}>
+      {/* <Card key={"234"}>
         <CardHeader>
           <Image
             src={"https://picsum.photos/200"}
@@ -77,7 +77,7 @@ export default async function EventList({ type, limit, isAdmin }: EventListProps
           )
           }
         </CardFooter>
-      </Card>
+      </Card> */}
     </div>
   )
 }

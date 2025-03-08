@@ -15,6 +15,9 @@ export default function Header() {
           <Link href="/events" className="hover:underline">
             All Events
           </Link>
+          <Link href="/sign-in" className="hover:underline">
+            Login
+          </Link>
           <ModeToggle />
         </nav>
       </div>

@@ -24,6 +24,7 @@ export default function Home() {
           <Button asChild variant="outline">
             <Link href="/events?type=past">View All Past Events</Link>
           </Button>
+
         </div>
       </section>
     </div>
