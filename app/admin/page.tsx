@@ -1,6 +1,4 @@
 // "use client"
-import { redirect } from 'next/navigation'
-import EventForm from '@/components/event-form'
 // import { useUser } from '@clerk/clerk-react'
 import EventList from '@/components/event-list'
 

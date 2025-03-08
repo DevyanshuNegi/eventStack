@@ -1,5 +1,4 @@
 // import { getServerSession } from 'next-auth/next'
-import { redirect } from 'next/navigation'
 import EventForm from '@/components/event-form'
 
 export default async function AddEventPage({ params }: { params: { id: string } }) {

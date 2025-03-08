@@ -1,15 +1,11 @@
-import { Inter } from 'next/font/google'
-import { ThemeProvider } from '@/components/theme-provider'
-import Header from '@/components/header'
 import Footer from '@/components/footer'
-import './globals.css'
+import Header from '@/components/header'
+import { ThemeProvider } from '@/components/theme-provider'
 import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
+  ClerkProvider
 } from '@clerk/nextjs'
+import { Inter } from 'next/font/google'
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 

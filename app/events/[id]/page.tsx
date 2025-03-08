@@ -1,5 +1,5 @@
 // "use client";
-import AddToCalendar from '@/components/add-to-calendar'
+import AddToCalendar from '@/components/add-to-calendar';
 import { getEventById } from '@/models/Event';
 
 export default async function EventPage({ params }: { params: { id: string } }) {

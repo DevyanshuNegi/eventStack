@@ -1,8 +1,6 @@
-import { ObjectId, Sort } from 'mongodb'
-import clientPromise from '@/lib/mongodb'
-import mongoose from 'mongoose';
-import { Document , Schema} from 'mongoose';
 import dbConnect from '@/lib/mongodb';
+import { ObjectId } from 'mongodb';
+import mongoose, { Document, Schema } from 'mongoose';
 
 export interface Event extends Document{
   _id: ObjectId

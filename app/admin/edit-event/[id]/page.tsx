@@ -1,8 +1,6 @@
-import { getServerSession } from 'next-auth/next'
-import { redirect } from 'next/navigation'
 import EventForm from '@/components/event-form'
 import { getEventById } from '@/models/Event'
-import { use, useEffect } from 'react'
+import { redirect } from 'next/navigation'
 
 export default async function EditEventPage({ params }: { params: { id: string } }) {
   // const session = await getServerSession()

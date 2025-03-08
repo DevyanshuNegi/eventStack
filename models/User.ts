@@ -1,6 +1,6 @@
+import { compare, hash } from 'bcrypt'
 import { ObjectId } from 'mongodb'
-import clientPromise from '@/lib/mongodb'
-import { hash, compare } from 'bcrypt'
+import mongoose, { Schema } from 'mongoose'
 
 export interface User {
   _id?: ObjectId
@@ -11,11 +11,23 @@ export interface User {
   updatedAt: Date
 }
 
-export async function createUser(user: Omit<User, '_id' | 'createdAt' | 'updatedAt'>): Promise<User> {
-  const client = await clientPromise
-  const db = client.db()
+const UserSchema: Schema<User> = new mongoose.Schema({
 
-  const existingUser = await db.collection<User>('users').findOne({ email: user.email })
+  name:{type:String, required:false},
+  email:{type:String, required:true},
+  password:{type:String, required:true},
+  createdAt:{type:Date, required:true},
+  updatedAt:{type:Date, required:true},
+}
+  , { timestamps: true })
+
+export const User = mongoose.models.User || mongoose.model<User>('User', UserSchema)
+
+export async function createUser(user: Omit<User, '_id' | 'createdAt' | 'updatedAt'>): Promise<User> {
+  // const client = await clientPromise
+  // const db = client.db()
+
+  const existingUser = await User.findOne({ email: user.email })
   if (existingUser) {
     throw new Error('User already exists')
   }
@@ -29,15 +41,14 @@ export async function createUser(user: Omit<User, '_id' | 'createdAt' | 'updated
     updatedAt: now,
   }
 
-  const result = await db.collection<User>('users').insertOne(newUser)
+  const result = await User.create(newUser)
   return { ...newUser, _id: result.insertedId }
 }
 
 export async function getUserByEmail(email: string): Promise<User | null> {
-  const client = await clientPromise
-  const db = client.db()
 
-  return db.collection<User>('users').findOne({ email })
+
+  return User.findOne({ email })
 }
 
 export async function validateUser(email: string, password: string): Promise<User | null> {

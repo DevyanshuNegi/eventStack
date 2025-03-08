@@ -1,7 +1,5 @@
-import { getEventById } from "@/models/Event";
-import { NextResponse } from "next/server"; 
 import { updateEvent } from "@/models/Event";
-import { Event } from "@/models/Event";
+import { NextResponse } from "next/server";
 
 
 export async function PUT(req: Request) {
